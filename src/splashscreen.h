@@ -6,9 +6,10 @@ int splashscreen(void){
 
     while(!WindowShouldClose()){
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+        ClearBackground(WHITE);
+        
         DrawText("Welcome to Q-timekeeper!", 190, 200, 20, BLACK);
-        DrawText("Press enter key to continue", 200, 230, 15, DARKGRAY);
+        DrawText("A job schduling simulator", 200, 230, 17, DARKGRAY);
         EndDrawing();
         
         if(IsKeyPressed(KEY_ENTER)){
