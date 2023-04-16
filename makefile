@@ -4,7 +4,8 @@
 CC = gcc
 
 # Directories
-SRC_DIR = ./src
+# SRC_DIR = ./src
+SRC_DIR = .
 BUILD_DIR = build
 LIB_DIR = lib
 INC_DIR = include
