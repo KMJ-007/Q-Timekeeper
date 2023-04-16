@@ -8,7 +8,7 @@
 
 void qtimekeeper()
 {
-    int max_process,algo_choice; 
+    int max_process,algo_choice,overhead_time=0; 
     // pointer to the process
     process_t *processes; 
     
@@ -47,9 +47,15 @@ void qtimekeeper()
         exit(1);
     }
 
+    // asking user for the overhead time
+    printf("Enter the overhead time: ");
+    scanf("%d",&overhead_time);
+
+    printf("overhead time %d\n",overhead_time);
+
     print_name("Enter the process details");
 
-
+    
     for(int i=0;i<max_process;i++){
         printf("Enter the arrival time of process %d: ",i+1);
         scanf("%d",&processes[i].arrival_time);
@@ -68,7 +74,7 @@ void qtimekeeper()
     // calling the function according to the choice
     switch(algo_choice){
         case 1:
-            fcfs(processes,max_process);
+            fcfs(processes,max_process,overhead_time);
             break;
         case 2:
             sjf(processes,max_process);

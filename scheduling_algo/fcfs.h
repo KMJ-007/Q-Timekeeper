@@ -3,14 +3,13 @@
 #include "../process_t.h"
 #include "../print_name.h"
 
-int fcfs(process_t *processes,int max_process){
+int fcfs(process_t *processes,int max_process, int overhead_time){
     print_name("First Come First Serve (FCFS)");
 
     int current_time = 0;
 
     // calculating the waiting time and turn around time for each process
     for(int i=0; i<max_process; i++){
-
         // first sorting the processes according to the arrival time using bubble sort
         for(int j=0; j<max_process-1; j++){
             if(processes[j].arrival_time > processes[j+1].arrival_time){
@@ -18,6 +17,10 @@ int fcfs(process_t *processes,int max_process){
                 processes[j] = processes[j+1];
                 processes[j+1] = temp;
             }
+        }
+        // if the current time is greater than the arrival time of the process then add the overhead time
+        if (current_time - processes[i-1].arrival_time > 0) {
+            current_time += overhead_time;
         }
 
         // if the current time is less than the arrival time of the process then update the current time to the arrival time of the process
@@ -31,6 +34,7 @@ int fcfs(process_t *processes,int max_process){
 
         // updating the finish time 
         processes[i].finish_time = current_time + processes[i].burst_time;
+        
         
         // updating the current time and moving to the next process
         current_time += processes[i].burst_time;
