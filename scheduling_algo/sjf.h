@@ -80,6 +80,14 @@ void sjf_non_premeemptive(process_t * processes, int max_process, int overhead_t
     printf("\nAverage Waiting Time: %f", avg_waiting_time);
     printf("\nAverage Turnaround Time: %f", avg_turnaround_time);
 
+    // ask use if he want to see the gantt chart
+    char choice;
+    printf("Do you want to see the gantt chart? (y/n): ");
+    scanf(" %c",&choice);
+    if(choice == 'y'){
+        draw_gantt_chart(processes,max_process,overhead_time,avg_waiting_time,avg_turnaround_time); //overhead time will automatically increase so it become total time
+    }
+
 
 }
 

@@ -9,6 +9,7 @@ typedef struct
     int remaining_time;
     int arrived;
     int completed;
+    int start_time;
     int waiting_time;
     int finish_time;
 } process_t;
