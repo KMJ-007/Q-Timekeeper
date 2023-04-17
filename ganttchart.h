@@ -49,9 +49,9 @@ void draw_gantt_chart(process_t processes[], int num_processes, int total_time, 
 
         // Clear background
         ClearBackground(WHITE);
+        DrawText("gantt chart", 10, 10, 20, BLACK);
 
-
-        // Draw Gantt chart box
+        // Draw Gantt chart box dynamically according to the number of processes and total time
         DrawRectangleLines(bar_x, bar_y, gantt_chart_box_width, gantt_chart_box_height, BLACK);
         
         // Draw Gantt chart bars
@@ -63,25 +63,24 @@ void draw_gantt_chart(process_t processes[], int num_processes, int total_time, 
             // draw vertical line between finish time and start time of next process
             DrawLineV((Vector2){bar_x + end_time * unit_time_width, bar_y}, (Vector2){bar_x + end_time * unit_time_width, bar_y + bar_height}, BLACK);
 
-            DrawText(TextFormat("P%d", processes[i].process_id), bar_x + start_time * unit_time_width + 5, bar_y + 5, 10, BLACK);
+            // process label  with respect to the finish time of the process and the start time of the next process
+            DrawText(TextFormat("P%d", processes[i].process_id), bar_x + end_time * unit_time_width + 5, bar_y + bar_height - 100, 20, BLACK);
         }
 
         // Draw time labels
+        // Draw time labels
         for (int i = 0; i <= total_time; i++) {
-            // only draw time labels if process is finishing at the time
-            for (int j = 0; j < num_processes; j++) {
-                if (processes[j].finish_time == i) {
-                    DrawText(TextFormat("%d", i), bar_x + i * unit_time_width - 10, bar_y + bar_height + 10, 20, BLACK);
-                    break;
-                }
-            }
+            // draw vertical line at each unit of time
+            // DrawLineV((Vector2){bar_x + i * unit_time_width, bar_y}, (Vector2){bar_x + i * unit_time_width, bar_y + bar_height}, BLACK);
+            // draw time label at each unit of time
+            DrawText(TextFormat("%d", i), bar_x + i * unit_time_width - 5, bar_y + bar_height + 5, 10, BLACK);
         }
 
         // Draw average waiting time
-        DrawText(TextFormat("Average waiting time: %d", avg_waiting_time), 10, 10, 20, BLACK);
+        DrawText(TextFormat("Average waiting time: %d ms", avg_waiting_time), 10, 40, 20, BLACK);
 
         // Draw average turnaround time
-        DrawText(TextFormat("Average turnaround time: %d", avg_turnaround_time), 10, 30, 20, BLACK);
+        DrawText(TextFormat("Average turnaround time: %d ms", avg_turnaround_time), 10, 60, 20, BLACK);
 
         // End drawing frame
         EndDrawing();

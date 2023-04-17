@@ -25,12 +25,12 @@ int main()
 
     // Initialize the dummy process data
     for(int i = 0; i < dummy_max_process; i++){
-        dummy_processes[i].process_id = i+1;
+        dummy_processes[i].process_id = i;
         dummy_processes[i].arrival_time = i*2;
         dummy_processes[i].burst_time = i*3;
         dummy_processes[i].priority = (i % 3) + 1;
         dummy_processes[i].start_time = 0;
-        dummy_processes[i].finish_time = i*3;
+        dummy_processes[i].finish_time = (i+1) * 3;
         //update total time
         dummy_total_time += dummy_processes[i].burst_time;
     }
