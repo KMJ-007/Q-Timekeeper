@@ -63,6 +63,8 @@ void qtimekeeper()
         scanf("%d",&processes[i].burst_time);
         processes[i].remaining_time = processes[i].burst_time;
         processes[i].process_id = i+1;
+        processes[i].completed = 0;
+        processes[i].arrived = 0;
 
         // if priority algo is choosen then also ask for priority
         if(algo_choice == 3){

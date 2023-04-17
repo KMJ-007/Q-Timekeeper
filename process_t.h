@@ -7,6 +7,8 @@ typedef struct
     int priority;
     int turn_around_time;
     int remaining_time;
+    int arrived;
+    int completed;
     int waiting_time;
     int finish_time;
 } process_t;
