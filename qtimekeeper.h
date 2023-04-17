@@ -61,6 +61,7 @@ void qtimekeeper()
         scanf("%d",&processes[i].arrival_time);
         printf("Enter the burst time of process %d: ",i+1);
         scanf("%d",&processes[i].burst_time);
+        processes[i].remaining_time = processes[i].burst_time;
         processes[i].process_id = i+1;
 
         // if priority algo is choosen then also ask for priority

@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"priority_non_premeemptive.h"
+#include"priority_premeemptive.h"
 
 
 void sort_process_by_arrival_priority(process_t *processes,int max_process){
@@ -37,7 +38,7 @@ int priority_scheduling(process_t *processes,int max_process,int overhead_time){
         priority_non_premeemptive(processes,max_process,overhead_time);
     }
     else{
-        // premeemptive(processes,max_process);
+        priority_premeemptive(processes,max_process,overhead_time);
         printf("Premeemptive not implemented yet\n");
     }
     
