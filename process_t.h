@@ -8,6 +8,4 @@ typedef struct
     int turn_around_time;
     int waiting_time;
     int finish_time;
-    int avg_waiting_time;
-    int avg_turn_around_time;
 } process_t;

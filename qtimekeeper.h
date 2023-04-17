@@ -77,7 +77,7 @@ void qtimekeeper()
             fcfs(processes,max_process,overhead_time);
             break;
         case 2:
-            sjf(processes,max_process);
+            sjf(processes,max_process,overhead_time);
             break;
         case 3:
             priority_scheduling(processes,max_process);
