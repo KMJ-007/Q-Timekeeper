@@ -60,13 +60,28 @@ void draw_gantt_chart(process_t processes[], int num_processes, int total_time, 
             float end_time = processes[i].finish_time;
             float duration = end_time - start_time;
             float bar_width = duration * unit_time_width;
-            DrawRectangle(bar_x + start_time * unit_time_width, bar_y, bar_width, bar_height, GetColor(processes[i].process_id));
+            // just need to draw a single vertical bar indeicating the running process very thin bar
+            if (start_time == end_time) {
+                DrawRectangle(bar_x + start_time * unit_time_width, bar_y, bar_thickness, bar_height, BLACK);
+                // drawing white line to cover the black rect by little to make it look like a thin bar
+                DrawRectangleLines(bar_x + start_time * unit_time_width+2, bar_y, bar_thickness, bar_height, WHITE);
+            } else {
+                DrawRectangle(bar_x + start_time * unit_time_width, bar_y, bar_width, bar_height, BLACK);
+                // drawing white line to cover the black rect by little to make it look like a thin bar
+                DrawRectangleLines(bar_x + start_time * unit_time_width+2, bar_y, bar_width, bar_height, WHITE);
+            }
             DrawText(TextFormat("P%d", processes[i].process_id), bar_x + start_time * unit_time_width + 5, bar_y + 5, 10, BLACK);
         }
 
         // Draw time labels
         for (int i = 0; i <= total_time; i++) {
-            DrawText(TextFormat("%d", i), bar_x + i * unit_time_width, bar_y + bar_height + 10, 10, BLACK);
+            // only draw time labels if process is finishing at the time
+            for (int j = 0; j < num_processes; j++) {
+                if (processes[j].finish_time == i) {
+                    DrawText(TextFormat("%d", i), bar_x + i * unit_time_width - 10, bar_y + bar_height + 10, 20, BLACK);
+                    break;
+                }
+            }
         }
 
         // Draw average waiting time
