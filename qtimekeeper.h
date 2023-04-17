@@ -80,7 +80,7 @@ void qtimekeeper()
             sjf(processes,max_process,overhead_time);
             break;
         case 3:
-            priority_scheduling(processes,max_process);
+            priority_scheduling(processes,max_process,overhead_time);
             break;
         case 4:
             round_robin(processes,max_process);
