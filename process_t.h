@@ -6,6 +6,7 @@ typedef struct
     int burst_time;
     int priority;
     int turn_around_time;
+    int remaining_time;
     int waiting_time;
     int finish_time;
 } process_t;

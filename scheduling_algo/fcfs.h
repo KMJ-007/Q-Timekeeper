@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include "../process_t.h"
 #include "../print_name.h"
+#include "../ganttchart.h"
 
 int fcfs(process_t *processes,int max_process, int overhead_time){
     print_name("First Come First Serve (FCFS)");
@@ -61,5 +62,13 @@ int fcfs(process_t *processes,int max_process, int overhead_time){
     }
     printf("\nAverage Waiting Time: %d ms",avg_waiting_time);
     printf("\nAverage Turn Around Time: %d ms\n",avg_turn_around_time);
+
+    // ask use if he want to see the gantt chart
+    char choice;
+    printf("Do you want to see the gantt chart? (y/n): ");
+    scanf(" %c",&choice);
+    if(choice == 'y'){
+        draw_gantt_chart(processes,max_process,overhead_time); //overhead time will automatically increase so it become total time
+    }
     
 }
