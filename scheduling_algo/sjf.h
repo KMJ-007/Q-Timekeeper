@@ -2,19 +2,19 @@
 #include<stdlib.h>
 
 // sort the process by arrival time and burst time
-void sort_processes_by_burst_time(process_t *processes, int n) {
-    process_t temp_process;
+void sort_processes_by_arrival_time_burst_time(process_t *processes, int n, int overhead_time) {
+     process_t temp_process;
     for(int i = 0; i < n; i++) {
         for(int j = i+1; j < n; j++) {
-            if(processes[i].arrival_time <= processes[j].arrival_time) {
-                if(processes[i].burst_time > processes[j].burst_time) {
-                    temp_process = processes[i];
-                    processes[i] = processes[j];
-                    processes[j] = temp_process;
-                }
+            // Check which process arrived first
+            if(processes[i].arrival_time > processes[j].arrival_time) {
+                temp_process = processes[i];
+                processes[i] = processes[j];
+                processes[j] = temp_process;
             }
-            else {
-                if(processes[i].burst_time > processes[j].burst_time && processes[i].arrival_time > processes[j].arrival_time) {
+            // If processes arrived at the same time, choose the one with shorter burst time
+            else if(processes[i].arrival_time == processes[j].arrival_time) {
+                if(processes[i].burst_time > processes[j].burst_time) {
                     temp_process = processes[i];
                     processes[i] = processes[j];
                     processes[j] = temp_process;
@@ -22,7 +22,25 @@ void sort_processes_by_burst_time(process_t *processes, int n) {
             }
         }
     }
+    
+    int time = 0;
+    for(int i = 0; i < n; i++) {
+        // Add overhead time if not the first process
+        if(i != 0) {
+            time += processes[i-1].burst_time + overhead_time;
+        }
+        int shortest_burst_time_index = i;
+        for(int j = i+1; j < n; j++) {
+            if(processes[j].arrival_time <= time && processes[j].burst_time < processes[shortest_burst_time_index].burst_time) {
+                shortest_burst_time_index = j;
+            }
+        }
+        temp_process = processes[i];
+        processes[i] = processes[shortest_burst_time_index];
+        processes[shortest_burst_time_index] = temp_process;
+    }
 }
+
 
 
 void sjf_non_premeemptive(process_t * processes, int max_process, int overhead_time){
@@ -80,7 +98,7 @@ int sjf(process_t *processes,int max_process,int overhead_time){
     scanf("%d",&premeemptive);
 
     
-    sort_processes_by_burst_time(processes,max_process);
+     sort_processes_by_arrival_time_burst_time(processes,max_process,overhead_time);
 
     if(premeemptive==0){
         sjf_non_premeemptive(processes,max_process,overhead_time);
