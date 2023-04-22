@@ -6,7 +6,7 @@ int main()
 {
     printf("\nWelcome to Q-Timekepper \n");
     printf("job scheduling simulator \n");
-    // qtimekeeper();
+    qtimekeeper();
     
     // process_t processes[] = {
     //     {1, 0, 5, 1, 0, 5, 0, 0},
@@ -36,7 +36,7 @@ int main()
     }
 
     // Call the function with the dummy variables
-    draw_gantt_chart(dummy_processes, dummy_max_process, dummy_total_time, 10, 10);
+    // draw_gantt_chart(dummy_processes, dummy_max_process, dummy_total_time, 10, 10);
 
 
 
