@@ -4,7 +4,7 @@
 ![image](https://user-images.githubusercontent.com/86996507/231542081-24a17f32-18ad-4f61-b760-0aecd8773210.png)
 
 
-## CPU schduling algorihem 
+## CPU scheduling algorithm
 - i wrote all the cpu scheduling algorithm in pure c
 - it was fun and good experiance
 - the challange was to show the gantt chart of process in graphic, for which the instruction was to use graphic.h, because it was not wokring on my pc, i used raylib, which is awseome!
